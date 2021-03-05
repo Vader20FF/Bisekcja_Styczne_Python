@@ -1,0 +1,2 @@
+def metodaBisekcji():
+    print("METODA")

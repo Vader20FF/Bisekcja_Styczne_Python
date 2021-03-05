@@ -1,0 +1,2 @@
+def metodaStycznych():
+    print("METODA")
