@@ -1,14 +1,15 @@
 from sys import exit as exitProgram
 from bisekcja import metodaBisekcji
 from styczne import metodaStycznych
-from horner import horner
-import sympy as sp
 from wykres import generowanieWykresu
+from wzorFunkcji import wzorFunkcji
 
 
 def menu():
     while True:
-        print("""Program do rozwiązywania równań nieliniowych
+        print("""
+        
+Program do rozwiązywania równań nieliniowych
 Metoda bisekcji i stycznych
 Lukasz Janiszewski, Maciej Kubis""")
         print("""
@@ -28,14 +29,13 @@ Wybierz opcje:
 def dataLoad():
     print("""
 Wybierz numer funkcji ktorej chcesz uzyc w programie:
-    1. FUNKCJA WIELOMIANOWA  5*x^3+2*x^2-x+5
-    2. FUNKCJA TRYGONOMETRYCZNA  5*cos(x)-3*sin(x)
-    3. FUNKCJA WYKLADNICZA  2^x-5^x
-    4. FUNKCJA ZLOZONA  -3*sin(x)+2*x^2-1""")
+    1. FUNKCJA WIELOMIANOWA  2 * x^3 + 1 * x^2 + 3 * x + 7
+    2. FUNKCJA TRYGONOMETRYCZNA  5 * cos(x) - 3 * sin(x)
+    3. FUNKCJA WYKLADNICZA  2^x - 5^x
+    4. FUNKCJA ZLOZONA  -3 * sin(x) + 2 * x^2 - 1""")
     selectedFunction = int(input("""
 """))
-    argumentX = sp.Symbol('x')
-    wzorFunkcji = None
+    wzorFunkcjiZmienna = None
     while selectedFunction not in [1, 2, 3, 4]:
         validNumber = False
         while not validNumber:
@@ -43,19 +43,11 @@ Wybierz numer funkcji ktorej chcesz uzyc w programie:
                 Wybierz jeszcze raz numer funkcji: """))
             if selectedFunction in [1, 2, 3, 4]:
                 validNumber = True
-    if selectedFunction == 1:
-        wzorFunkcji = horner([5, 2, -1, 5], argumentX)
-    elif selectedFunction == 2:
-        wzorFunkcji = 5*sp.cos(argumentX)-3*sp.sin(argumentX)
-    elif selectedFunction == 3:
-        wzorFunkcji = 2**argumentX-5**argumentX
-    elif selectedFunction == 4:
-        wzorFunkcji = -3 * sp.sin(argumentX) + 2 * argumentX ** 2 - 1
+    wzorFunkcjiZmienna = wzorFunkcji(selectedFunction)
 
-    leftBorder = int(input("""
-Podaj lewy przedział jako liczbe calkowita: """))
-    rightBorder = int(input("""
-Podaj prawy przedział jako liczbe calkowita: """))
+    leftBorder = float(input("""
+Podaj lewa granice przedziału: """))
+    rightBorder = float(input("""Podaj prawa granice przedziału: """))
 
     print("""
 Wybierz kryterium zakonczenia algorytmu:
@@ -83,20 +75,14 @@ Podaj liczbe iteracji: """))
 
     generowanieWykresu(leftBorder, rightBorder, selectedFunction)
 
-    obliczenia(wzorFunkcji, leftBorder, rightBorder, epsilon, iterations)
+    obliczenia(leftBorder, rightBorder, epsilon, iterations, selectedFunction, wzorFunkcjiZmienna)
 
 
-def obliczenia(wzorFunkcji, leftBorder, rightBorder, epsilon, iterationNumber):
-    wynikBisekcja = metodaBisekcji()
+def obliczenia(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji, wzorFunkcji):
+    wynikBisekcja = metodaBisekcji(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji, wzorFunkcji)
+    print("Metoda bisekcji zwrocila wartosc:", wynikBisekcja)
+
     wynikStyczne = metodaStycznych()
-
-    if not wynikBisekcja:
-        print("""
-Nie mozna poprawnie zrealizowac metody bisekcji dla wybranej funkcji!""")
-
-    if not wynikStyczne:
-        print("""
-Nie mozna poprawnie zrealizowac metody stycznych dla wybranej funkcji!""")
 
 
 ##########################################################################
