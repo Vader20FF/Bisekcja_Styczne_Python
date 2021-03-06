@@ -21,34 +21,14 @@ def metodaBisekcji(leftBorder, rightBorder, epsilon, iterations, numerFunkcji):
                 if abs(wartoscFunkcji(xm, numerFunkcji)) <= epsilon and (abs(dfxn) > epsilon):
                     # jeżeli znaleźliśmy miejsce zerowe mniejsze bądź równe przybliżeniu zera
                     # oraz funkcja w tym miejscu nie dąży do stałej wartości
-                    print("Metoda bisekcji: znaleziono rozwiazanie po " + str(liczbaIteracji) + " iteracjach.")
+                    print(f"Metoda Bisekcji (epsilon): Znaleziono rozwiazanie po {liczbaIteracji} iteracjach.")
+                    print(f"Metoda Bisekcji (epsilon): Osiagnieto dokladnosc na poziomie {epsilon}.")
                     return xm
                 elif wartoscFunkcji(xm, numerFunkcji) * wartoscFunkcji(xl, numerFunkcji) < 0:
                     xu = xm
                 else:
                     xl = xm
                 liczbaIteracji += 1
-
-
-            else:
-                xu = xm
-                xm = (xl + xu) / 2
-                if wartoscFunkcji(xl, numerFunkcji) * wartoscFunkcji(xm, numerFunkcji) < 0:
-                    xu = xm
-                    while abs(xu - xl / xu) * 100 > epsilon:
-                        xm = (xl + xu) / 2
-                        if wartoscFunkcji(xl, numerFunkcji) * wartoscFunkcji(xm, numerFunkcji) < 0:
-                            xu = xm
-                        else:
-                            xl = xm
-                else:
-                    xl = xm
-                    while abs(xu - xl / xu) * 100 > epsilon:
-                        xm = (xl + xu) / 2
-                        if wartoscFunkcji(xl, numerFunkcji) * wartoscFunkcji(xm, numerFunkcji) < 0:
-                            xu = xm
-                        else:
-                            xl = xm
 
         elif epsilon is None and iterations is not None:
             for iterationNumber in range(iterations):
@@ -59,7 +39,9 @@ def metodaBisekcji(leftBorder, rightBorder, epsilon, iterations, numerFunkcji):
                     xu = xm
                 else:
                     xl = xm
-            print(f"Znaleziono rozwiazanie po {iterations} iteracjach.")
+            temp_epsilon = abs(wartoscFunkcji(xm, numerFunkcji))
+            print(f"Metoda Bisekcji (liczba iteracji): Znaleziono rozwiazanie po {iterations} iteracjach.")
+            print(f"Metoda Bisekcji (liczba iteracji): Osiagnieto dokladnosc na poziomie {temp_epsilon}.")
             return xm
         else:
             print("Nie podano ani epsilona ani liczby iteracji!")
