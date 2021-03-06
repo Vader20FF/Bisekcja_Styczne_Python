@@ -2,14 +2,14 @@ from horner import horner
 import numpy as np
 
 
-def wartoscFunkcji(x, wzorFunkcji):
-    if wzorFunkcji == 1:
+def wartoscFunkcji(x, numerFunkcji):
+    if numerFunkcji == 1:
         return horner([2, 1, 3, 7], x)
-    elif wzorFunkcji == 2:
+    elif numerFunkcji == 2:
         return 5 * np.cos(x) - 3 * np.sin(x)
-    elif wzorFunkcji == 3:
+    elif numerFunkcji == 3:
         return 2**x-5**x
-    elif wzorFunkcji == 4:
+    elif numerFunkcji == 4:
         return -3 * np.sin(x) + 2 * x ** 2 - 1
     else:
         print("""

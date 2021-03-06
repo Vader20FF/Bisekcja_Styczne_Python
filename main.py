@@ -35,7 +35,6 @@ Wybierz numer funkcji ktorej chcesz uzyc w programie:
     4. FUNKCJA ZLOZONA  -3 * sin(x) + 2 * x^2 - 1""")
     selectedFunction = int(input("""
 """))
-    wzorFunkcjiZmienna = None
     while selectedFunction not in [1, 2, 3, 4]:
         validNumber = False
         while not validNumber:
@@ -73,16 +72,21 @@ Podaj liczbe iteracji: """))
             if iterations > 0 and isinstance(iterations, int):
                 valid = True
 
-    generowanieWykresu(leftBorder, rightBorder, selectedFunction)
-
-    obliczenia(leftBorder, rightBorder, epsilon, iterations, selectedFunction, wzorFunkcjiZmienna)
+    obliczenia(leftBorder, rightBorder, epsilon, iterations, selectedFunction)
 
 
-def obliczenia(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji, wzorFunkcji):
-    wynikBisekcja = metodaBisekcji(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji, wzorFunkcji)
+def obliczenia(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji):
+    wynikBisekcja = metodaBisekcji(leftBorder, rightBorder, epsilon, iterationNumber, numerFunkcji)
     print("Metoda bisekcji zwrocila wartosc:", wynikBisekcja)
 
     wynikStyczne = metodaStycznych()
+    print("Metoda stycznych zwrocila wartosc:", wynikStyczne)
+
+    prezentacja(leftBorder, rightBorder, wynikBisekcja, wynikStyczne, numerFunkcji)
+
+
+def prezentacja(leftBorder, rightBorder, wynikBisekcja, wynikStyczne, numerFunkcji):
+    generowanieWykresu(leftBorder, rightBorder, wynikBisekcja, wynikStyczne, numerFunkcji)
 
 
 ##########################################################################
