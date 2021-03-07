@@ -30,9 +30,9 @@ def wczytywanieDanych():
     print("""
 Wybierz numer funkcji ktorej chcesz uzyc w programie:
     1. FUNKCJA WIELOMIANOWA  2 * x^3 + 1 * x^2 + 3 * x + 7
-    2. FUNKCJA TRYGONOMETRYCZNA  5 * cos(x) - 3 * sin(x)
+    2. FUNKCJA TRYGONOMETRYCZNA  sin(x) - 5 * cos(x)
     3. FUNKCJA WYKLADNICZA  2^(x-1) - 4
-    4. FUNKCJA ZLOZONA  7 * cos(x) + 2 * x^2 - 1""")
+    4. FUNKCJA ZLOZONA  3 * sin(2^x) + 2^x""")
     numerFunkcji = int(input("""
 Wybór: """))
     while numerFunkcji not in [1, 2, 3, 4]:
@@ -76,12 +76,24 @@ Podaj liczbe iteracji: """))
 
 def obliczenia(lewaGranica, prawaGranica, epsilon, liczbaIteracji, numerFunkcji):
     wynikBisekcja = metodaBisekcji(lewaGranica, prawaGranica, epsilon, liczbaIteracji, numerFunkcji)
-    print("Metoda Bisekcji zwrocila wartosc:", wynikBisekcja)
-
     wynikStyczne = metodaStycznych(lewaGranica, prawaGranica, epsilon, liczbaIteracji, numerFunkcji)
-    print("Metoda Stycznych zwrocila wartosc:", wynikStyczne)
 
-    prezentacja(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji)
+    if wynikBisekcja is None and wynikStyczne is None:
+        print("""
+Miejsca zerowe wybranej funkcji nie moga byc wyznaczone powyzszymi metodami!""")
+    else:
+        if wynikBisekcja is None:
+            print("""
+Miejsca zerowe wybranej funkcji nie moga byc wyznaczone metoda bisekcji!""")
+            print("Metoda Stycznych zwrocila wartosc:", wynikStyczne)
+        elif wynikStyczne is None:
+            print("""
+Miejsca zerowe wybranej funkcji nie moga byc wyznaczone metoda stycznych!""")
+            print("Metoda Bisekcji zwrocila wartosc:", wynikBisekcja)
+        else:
+            print("Metoda Bisekcji zwrocila wartosc:", wynikBisekcja)
+            print("Metoda Stycznych zwrocila wartosc:", wynikStyczne)
+        prezentacja(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji)
 
 
 def prezentacja(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji):
