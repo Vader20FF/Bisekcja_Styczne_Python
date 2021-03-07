@@ -1,5 +1,5 @@
-def horner(listaWspolczynnikow, argumentX):
+def horner(listaWspolczynnikow, x):
     wynik = 0
-    for item in reversed(listaWspolczynnikow):
-        wynik = wynik * argumentX + item
+    for wspolczynnik in reversed(listaWspolczynnikow):
+        wynik = wynik * x + wspolczynnik
     return wynik

@@ -3,24 +3,22 @@ from wzorFunkcji import wzorFunkcji
 import sympy as sp
 
 
-def metodaBisekcji(leftBorder, rightBorder, epsilon, iterations, numerFunkcji):
-    xl = leftBorder
-    xu = rightBorder
+def metodaBisekcji(lewaGranica, prawaGranica, epsilon, liczbaIteracji, numerFunkcji):
+    xl = lewaGranica
+    xu = prawaGranica
     xm = 0
-    print(leftBorder, rightBorder, epsilon, iterations, numerFunkcji)
-    # Jesli wartosc iloczynu f(xl) * f(xu) jest mniejsze od 0, istnieje przynajmniej jeden pierwiastek
+    # Jesli wartosc iloczynu f(xl) * f(xu) jest mniejsza od 0, istnieje przynajmniej jeden pierwiastek
     if wartoscFunkcji(xl, numerFunkcji) * wartoscFunkcji(xu, numerFunkcji) < 0:
         # Dzialanie na epsilonie
-        if iterations is None and epsilon is not None:
-            x = sp.Symbol('x')
-            df = sp.diff(wzorFunkcji(numerFunkcji))  # obliczenie pochodnej funkcji
+        if liczbaIteracji is None and epsilon is not None:
             liczbaIteracji = 0
+            x = sp.Symbol('x')
+            pochodna = sp.diff(wzorFunkcji(numerFunkcji))
             while True:
                 xm = (xl + xu) / 2
-                dfxn = df.subs(x, xm)       # obliczenie wartosci pochodnej dla argumentu
-                if abs(wartoscFunkcji(xm, numerFunkcji)) <= epsilon and (abs(dfxn) > epsilon):
-                    # jeżeli znaleźliśmy miejsce zerowe mniejsze bądź równe przybliżeniu zera
-                    # oraz funkcja w tym miejscu nie dąży do stałej wartości
+                wartoscPochodnej = pochodna.subs(x, xm)
+                if abs(wartoscFunkcji(xm, numerFunkcji)) <= epsilon and (abs(wartoscPochodnej) > epsilon):
+                    print()
                     print(f"Metoda Bisekcji (epsilon): Znaleziono rozwiazanie po {liczbaIteracji} iteracjach.")
                     print(f"Metoda Bisekcji (epsilon): Osiagnieto dokladnosc na poziomie {epsilon}.")
                     return xm
@@ -29,9 +27,9 @@ def metodaBisekcji(leftBorder, rightBorder, epsilon, iterations, numerFunkcji):
                 else:
                     xl = xm
                 liczbaIteracji += 1
-
-        elif epsilon is None and iterations is not None:
-            for iterationNumber in range(iterations):
+        # Dzialanie na liczbie iteracji
+        elif epsilon is None and liczbaIteracji is not None:
+            for iterationNumber in range(liczbaIteracji):
                 xm = (xl + xu) / 2
                 if wartoscFunkcji(xm, numerFunkcji) == 0:
                     return xm
@@ -40,7 +38,7 @@ def metodaBisekcji(leftBorder, rightBorder, epsilon, iterations, numerFunkcji):
                 else:
                     xl = xm
             temp_epsilon = abs(wartoscFunkcji(xm, numerFunkcji))
-            print(f"Metoda Bisekcji (liczba iteracji): Znaleziono rozwiazanie po {iterations} iteracjach.")
+            print(f"Metoda Bisekcji (liczba iteracji): Znaleziono rozwiazanie po {liczbaIteracji} iteracjach.")
             print(f"Metoda Bisekcji (liczba iteracji): Osiagnieto dokladnosc na poziomie {temp_epsilon}.")
             return xm
         else:

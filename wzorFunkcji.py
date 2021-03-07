@@ -9,9 +9,9 @@ def wzorFunkcji(numerFunkcji):
     elif numerFunkcji == 2:
         return 5*sp.cos(x)-3*sp.sin(x)
     elif numerFunkcji == 3:
-        return 2**x-5**x
+        return 2**(x-1)-4
     elif numerFunkcji == 4:
-        return -3*sp.sin(x)+2*x**2-1
+        return x*sp.cos(x)+2*x**2-1
     else:
         print("""
 Przekazano nieprawidlowa wartosc numeru wzoru funkcji do metody "wzorFunkcji" """)
