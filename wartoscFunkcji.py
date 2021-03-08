@@ -10,7 +10,7 @@ def wartoscFunkcji(x, numerFunkcji):
     elif numerFunkcji == 3:
         return 2**(x-1)-4
     elif numerFunkcji == 4:
-        return 3*np.sin(2**x)+2**x
+        return np.cos(2*x**2+4)
     else:
         print("""
 Przekazano nieprawidlowa wartosc numeru wzoru funkcji do metody "wartoscFunkcji" """)

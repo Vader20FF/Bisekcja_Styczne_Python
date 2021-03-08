@@ -32,7 +32,7 @@ Wybierz numer funkcji ktorej chcesz uzyc w programie:
     1. FUNKCJA WIELOMIANOWA  2 * x^3 + 1 * x^2 + 3 * x + 7
     2. FUNKCJA TRYGONOMETRYCZNA  sin(x) - 5 * cos(x)
     3. FUNKCJA WYKLADNICZA  2^(x-1) - 4
-    4. FUNKCJA ZLOZONA  3 * sin(2^x) + 2^x""")
+    4. FUNKCJA ZLOZONA  cos(2 * x^2 + 4)""")
     numerFunkcji = int(input("""
 Wybór: """))
     while numerFunkcji not in [1, 2, 3, 4]:
