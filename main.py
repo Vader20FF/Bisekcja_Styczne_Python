@@ -71,6 +71,8 @@ Podaj liczbe iteracji: """))
             if liczbaIteracji > 0 and isinstance(liczbaIteracji, int):
                 valid = True
 
+    generowanieWykresu(lewaGranica, prawaGranica, None, None, numerFunkcji, False)
+
     obliczenia(lewaGranica, prawaGranica, epsilon, liczbaIteracji, numerFunkcji)
 
 
@@ -97,7 +99,7 @@ Miejsca zerowe wybranej funkcji nie moga byc wyznaczone metoda stycznych!""")
 
 
 def prezentacja(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji):
-    generowanieWykresu(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji)
+    generowanieWykresu(lewaGranica, prawaGranica, wynikBisekcja, wynikStyczne, numerFunkcji, True)
 
 
 ##########################################################################
